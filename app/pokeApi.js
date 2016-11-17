@@ -16,9 +16,16 @@ router.get("/", (req, res) => {
     res.json(pokeDB);
 })
 
-router.get("/:pokeId", req, res){
+router.get("/:pokeId", function(req, res){
+    let pokeId = req.params.pokeId
+    let pokeData = catchPokemon(pokeId)
     
-}
+    if(pokeData) {
+        res.json(pokeData)
+    }else{
+        res.status(404).send("Not Found")
+    }
+})
 
 //export router
 module.exports = router
